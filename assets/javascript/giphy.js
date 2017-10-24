@@ -35,7 +35,7 @@ $(document.body).on("click", ".thingie", function() {
 
 	var search = $(this).val();
 	var search2 = search.replace(/\ /g, '+');
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search2 + "&api_key=" + api + "&limit=10";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search2 + "&api_key=" + api + "&limit=10";
 	$.ajax({
 		url: queryURL,
    		method: "GET"

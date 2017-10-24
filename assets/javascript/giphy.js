@@ -73,7 +73,7 @@ $(document.body).on("click", ".submit", function() {
 	event.preventDefault();
 	var searchTerm = $("#query").val();
 	var search2 = searchTerm.replace(/\ /g, '+');
-	var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + search2 + "&api_key=" + api + "&limit=10&rating=pg-13";
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + search2 + "&api_key=" + api + "&limit=10&rating=pg-13";
 	$.ajax({
 		url: queryURL,
    		method: "GET"

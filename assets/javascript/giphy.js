@@ -1,5 +1,6 @@
 var topics = ["kfc", "taco bell", "pizza hut", "mcdonalds", "burger king", "jack in the box", "arbys", "wendys", "white castle", "in n out"];
 var api = "qKI9o7vmxHqMSJ5umVXCxbCWPxN8HFxj";
+var results;
 function callButtons() {
 	$("#button-collection").empty();
 	for (var i = 0; i < topics.length; i++) {
@@ -11,9 +12,24 @@ function callButtons() {
 }
 callButtons();
 function callGIFS() {
-
+	$("#current-gifs").empty();
+	for (var i = 0; i < results.length; i++) {
+		var newDiv = $("<div>");
+		var newGIF = $("<img>");
+		newGIF.attr("src", results[i].images.fixed_height_still.url);
+		newGIF.addClass("gif");
+		newGIF.attr("data-state", "still");
+		newGIF.attr("data-still", results[i].images.fixed_height.url);
+		newGIF.attr("data-animate", results[i].images.fixed_height_still.url);
+		newDiv.append(newGIF);
+		newDiv.append("<h3>Rated: " + results[i].rating + "</h3>");
+		$("#current-gifs").prepend(newDiv);
+	}
 }
-
+/*function resetGIF() {
+	$("#currents-gifs").empty();
+	console.log($("#currents-gifs"));
+}*/
 $(document.body).on("click", ".thingie", function() {
 	event.preventDefault();
 
@@ -24,9 +40,20 @@ $(document.body).on("click", ".thingie", function() {
 		url: queryURL,
    		method: "GET"
   	}).done(function(GIPHYData) {
-  		var results = GIPHYData.data;	
-  		console.log(results);
-  		
+  		results = GIPHYData.data;	
+  		callGIFS();
+  	/*	for (var i = 0; i < results.length; i++) {
+  			var newDiv = $("<div>");
+  			var newGIF = $("<img>");
+  			newGIF.attr("src", results[i].images.fixed_height_still.url);
+  			newGIF.addClass("gif");
+  			newGIF.attr("data-state", "still");
+			newGIF.attr("data-still", results[i].images.fixed_height.url);
+			newGIF.attr("data-animate", results[i].images.fixed_height_still.url);
+			newDiv.append(newGIF);
+			newDiv.append("<h3>Rated: " + results[i].rating + "</h3>");
+  			$("#current-gifs").prepend(newDiv);
+  		}*/
   		
 
 	});
@@ -51,15 +78,14 @@ $(document.body).on("click", ".submit", function() {
 		url: queryURL,
    		method: "GET"
   	}).done(function(GIPHYData) {
-  		var results = GIPHYData.data;	
+  		results = GIPHYData.data;	
   		topics.push(searchTerm);
-  		console.log(topics);
+  		
   		callButtons();
-  		for (var i = 0; i < results.length; i++) {
-
+  		callGIFS();
+  		/*for (var i = 0; i < results.length; i++) {
   			var newDiv = $("<div>");
   			var newGIF = $("<img>");
-  		
   			newGIF.attr("src", results[i].images.fixed_height_still.url);
   			newGIF.addClass("gif");
   			newGIF.attr("data-state", "still");
@@ -69,6 +95,6 @@ $(document.body).on("click", ".submit", function() {
 			newDiv.append("<h3>Rated: " + results[i].rating + "</h3>");
   			$("#current-gifs").prepend(newDiv);
   		}
-
+*/
 	});
 });

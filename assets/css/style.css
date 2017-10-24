@@ -1,4 +1,10 @@
 .thingie {
-    margin: 5px;
+    margin: 10px;
     padding: 10px;
+}
+.gif {
+	margin: 10px;
+}
+#search {
+	margin: 10px;
 }
